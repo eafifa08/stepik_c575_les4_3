@@ -21,7 +21,6 @@ class LoginPageLocators:
     REGISTER_BUTTON = (By.XPATH, "//button[@name='registration_submit']")
 
 
-
 class ProductPageLocators:
     ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, ".btn-add-to-basket")
     NAME_OF_PRODUCT_IN_MESSAGES = (By.XPATH, "//div[@class='alertinner ']//strong")
@@ -31,4 +30,3 @@ class ProductPageLocators:
 class BasketPageLocators:
     TEXT_THAT_BASKET_IS_EMPTY = (By.XPATH, "//div[@id='content_inner']/p")
     ITEMS_EXIST_IN_BASKET = (By.CSS_SELECTOR, ".basket-items")
-

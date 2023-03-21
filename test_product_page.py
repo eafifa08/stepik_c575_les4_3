@@ -1,25 +1,9 @@
 import pytest
-import time
 import faker
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from .main_page import MainPage
-from .login_page import LoginPage
-from .pages.product_page import ProductPage
-from .pages.basket_page import BasketPage
-
-'''
-@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
-                                pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail),
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
-   '''
+from pages.main_page import MainPage
+from pages.login_page import LoginPage
+from pages.product_page import ProductPage
+from pages.basket_page import BasketPage
 
 
 class TestUserAddToBasketFromProductPage:
@@ -38,7 +22,6 @@ class TestUserAddToBasketFromProductPage:
 
         self.product_page = ProductPage(browser=browser, url=self.url)
         self.product_page.open()
-        time.sleep(5)
         self.product_page.go_to_login()
         self.login_page = LoginPage(browser, browser.current_url)
         self.login_page.register_new_user(email=email, password=password)
@@ -57,7 +40,9 @@ class TestUserAddToBasketFromProductPage:
         page.add_to_basket()
         page.should_be_name_added()
 
-
+@pytest.mark.parametrize('link', ["okay_link",
+                                  pytest.param("bugged_link", marks=pytest.mark.xfail),
+                                  "okay_link"])
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     page = ProductPage(browser, link)
